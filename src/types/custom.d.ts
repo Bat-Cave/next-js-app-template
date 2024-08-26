@@ -1,1 +1,0 @@
-type Brand = "cove" | "alder";
