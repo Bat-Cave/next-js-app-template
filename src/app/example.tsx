@@ -1,13 +1,13 @@
 "use client";
 
 import { QUERY_KEYS } from "@/data/react-query";
-import { sampleFetch } from "@/functions/test";
+import { minDelay, sampleFetch } from "@/functions";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Example() {
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.SAMPLE],
-    queryFn: () => sampleFetch(),
+    queryFn: () => minDelay(sampleFetch(), 3000),
   });
 
   return (
