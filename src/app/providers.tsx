@@ -1,12 +1,14 @@
 // In Next.js, this file would be called: app/providers.jsx
 "use client";
 
+import { TailwindIndicator } from "@/components/dev-tools";
 // Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import {
   isServer,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { MotionConfig } from "framer-motion";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -44,6 +46,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.33 }}>
+      <QueryClientProvider client={queryClient}>
+        {children}
+        {/* Dev tools */}
+        <TailwindIndicator />
+      </QueryClientProvider>
+    </MotionConfig>
   );
 }
