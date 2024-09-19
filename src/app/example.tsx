@@ -1,23 +1,23 @@
 "use client";
 
-import { QUERY_KEYS } from "@/lib/react-query";
-import { sampleFetch } from "@/functions";
-import { useQuery } from "@tanstack/react-query";
-import { minDelay } from "@/lib/helpers";
-import { format } from "date-fns";
+import { Spinner } from "@/components/spinner";
+import { trpc } from "@/server/client";
 
 export default function Example() {
-  const { data, dataUpdatedAt, ...rest } = useQuery({
-    queryKey: [QUERY_KEYS.SAMPLE],
-    queryFn: () => minDelay(sampleFetch(), 3000),
-  });
+  const { data: users, isLoading } = trpc.user.getUsers.useQuery();
 
-  console.log(rest);
+  if (isLoading) {
+    return <Spinner size={48} speed={800} />;
+  }
 
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      <p className="text-xs">Updated at: {format(dataUpdatedAt, "pp")}</p>
+      {users?.map((user) => (
+        <div key={user.id} className="flex gap-2 items-center">
+          <p>{user.id}</p>
+          <p>{user.name}</p>
+        </div>
+      ))}
     </div>
   );
 }
