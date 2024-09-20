@@ -1,9 +1,12 @@
 import { Spinner } from "@/components/spinner";
 
-export default function Loading() {
+const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 p-24">
+    <div>
+      <p>Loading...</p>
       <Spinner size={48} speed={800} />
     </div>
   );
-}
+};
+
+export default Loading;

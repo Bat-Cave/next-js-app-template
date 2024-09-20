@@ -5,16 +5,61 @@ import { TRPCError } from "@trpc/server";
 type User = {
   id: string;
   name: string;
+  age: number;
+  email: string;
+  favorite_color: string;
 };
 
 const users: Array<User> = [
-  { id: "1", name: "Alice" },
-  { id: "2", name: "Bob" },
-  { id: "3", name: "Charlie" },
-  { id: "4", name: "Dave" },
-  { id: "5", name: "Eve" },
-  { id: "6", name: "Faye" },
-  { id: "7", name: "Gabby" },
+  {
+    id: "1",
+    name: "Alice",
+    age: 30,
+    email: "alice@example.com",
+    favorite_color: "#ff0000",
+  },
+  {
+    id: "2",
+    name: "Bob",
+    age: 25,
+    email: "bob@example.com",
+    favorite_color: "#00ff00",
+  },
+  {
+    id: "3",
+    name: "Charlie",
+    age: 35,
+    email: "charlie@example.com",
+    favorite_color: "#0000ff",
+  },
+  {
+    id: "4",
+    name: "Dave",
+    age: 40,
+    email: "dave@example.com",
+    favorite_color: "#ffff00",
+  },
+  {
+    id: "5",
+    name: "Eve",
+    age: 45,
+    email: "eve@example.com",
+    favorite_color: "#00ffff",
+  },
+  {
+    id: "6",
+    name: "Faye",
+    age: 50,
+    email: "faye@example.com",
+    favorite_color: "#ff00ff",
+  },
+  {
+    id: "7",
+    name: "Gabby",
+    age: 55,
+    email: "gabby@example.com",
+    favorite_color: "#00ff00",
+  },
 ];
 
 export const userRouter = createRouter({

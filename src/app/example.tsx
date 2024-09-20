@@ -2,6 +2,7 @@
 
 import { Spinner } from "@/components/spinner";
 import { trpc } from "@/server/client";
+import Link from "next/link";
 
 export default function Example() {
   const { data: users, isLoading } = trpc.user.getUsers.useQuery();
@@ -13,10 +14,14 @@ export default function Example() {
   return (
     <div>
       {users?.map((user) => (
-        <div key={user.id} className="flex gap-2 items-center">
+        <Link
+          href={`/user/${user.id}`}
+          key={user.id}
+          className="flex gap-2 items-center"
+        >
           <p>{user.id}</p>
           <p>{user.name}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );
