@@ -2,15 +2,7 @@ import { z } from "zod";
 import { createRouter, publicProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 
-type User = {
-  id: string;
-  name: string;
-  age: number;
-  email: string;
-  favorite_color: string;
-};
-
-const users: Array<User> = [
+const users = [
   {
     id: "1",
     name: "Alice",
@@ -80,6 +72,7 @@ export const userRouter = createRouter({
           message: `User with id ${input.id} not found`,
         });
       }
+
       return user;
     }),
   deleteUser: publicProcedure
