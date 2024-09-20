@@ -48,27 +48,33 @@ export default function RootLayout({
             </div>
           </ReverseDrawerTrigger>
           <ReverseDrawerRoot>
-            <nav className="sticky top-0 w-full py-4 px-8 bg-neutral-300 flex justify-between gap-2">
-              <p className="hidden md:block">Nav</p>
-              <ReverseDrawerTrigger className="block md:hidden">
-                Toggle
-              </ReverseDrawerTrigger>
-              <ul className="gap-2 items-center hidden md:flex">
-                <li>
-                  <Link href="/">Home</Link>
-                </li>
-                <li>
-                  <Link href="/user/1">User 1</Link>
-                </li>
-                <li>
-                  <Link href="/user/2">User 2</Link>
-                </li>
-              </ul>
+            <nav className="sticky top-0 w-full bg-neutral-300">
+              <div className="py-4 px-8 flex justify-between gap-2 max-w-screen-lg mx-auto">
+                <p className="hidden md:block">Nav</p>
+                <ReverseDrawerTrigger className="block md:hidden">
+                  Toggle
+                </ReverseDrawerTrigger>
+                <ul className="gap-2 items-center hidden md:flex">
+                  <li>
+                    <Link href="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link href="/user/1">User 1</Link>
+                  </li>
+                  <li>
+                    <Link href="/user/2">User 2</Link>
+                  </li>
+                </ul>
+              </div>
             </nav>
             <main className="flex grow flex-col items-center justify-center">
               {children}
             </main>
-            <footer className="w-full py-12 px-8 bg-neutral-300">Footer</footer>
+            <footer className="w-full bg-neutral-300">
+              <div className="w-full py-4 px-8 flex gap-2 justify-between max-w-screen-lg mx-auto">
+                Footer
+              </div>
+            </footer>
           </ReverseDrawerRoot>
         </Providers>
       </body>
