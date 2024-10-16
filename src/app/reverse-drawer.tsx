@@ -1,5 +1,6 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import {
   ButtonHTMLAttributes,
   createContext,
@@ -23,30 +24,32 @@ const reverseDrawerVariants = {
 const ReverseDrawerRoot = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, setIsOpen } = useReverseDrawer();
   return (
-    <motion.div
-      style={{
-        gridArea: "1/1",
-        overflow: `${isOpen ? "hidden" : "auto"}`,
-      }}
-      animate={isOpen ? "open" : "closed"}
-      variants={reverseDrawerVariants}
-      transition={{ duration: 0.8, type: "spring", bounce: 0 }}
-      className="group flex flex-col min-h-screen w-full bg-white shadow-lg relative"
-    >
-      {children}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.button
-            type="button"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-    </motion.div>
+    <MotionConfig transition={{ duration: 0.8, type: "spring", bounce: 0 }}>
+      <motion.div
+        style={{
+          gridArea: "1/1",
+          overflow: `${isOpen ? "hidden" : "auto"}`,
+        }}
+        animate={isOpen ? "open" : "closed"}
+        variants={reverseDrawerVariants}
+        className={`group flex flex-col min-h-screen w-full bg-white shadow-lg relative`}
+        data-state={isOpen ? "open" : "closed"}
+      >
+        {children}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.button
+              type="button"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`absolute inset-0 bg-black/50`}
+              onClick={() => setIsOpen(false)}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </MotionConfig>
   );
 };
 
@@ -54,7 +57,14 @@ const ReverseDrawerTrigger = (
   props: Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick">
 ) => {
   const { isOpen, setIsOpen } = useReverseDrawer();
-  return <button onClick={() => setIsOpen(!isOpen)} {...props} />;
+  return (
+    <button
+      onClick={() => setIsOpen(!isOpen)}
+      {...props}
+      data-state={isOpen ? "open" : "closed"}
+      className={cn(props.className, "group")}
+    />
+  );
 };
 
 const reverseDrawerContext = createContext<{
