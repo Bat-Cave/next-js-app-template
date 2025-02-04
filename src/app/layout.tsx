@@ -5,8 +5,13 @@ import "../styles/spinner.css";
 import Providers from "./providers";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ReverseDrawerRoot, ReverseDrawerTrigger } from "./reverse-drawer";
-import MobileDrawerNav from "@/components/layout/mobile-drawer-nav";
+import { X } from "lucide-react";
+import {
+  ReverseDrawerClose,
+  ReverseDrawerContent,
+  ReverseDrawerRoot,
+  ReverseDrawerTrigger,
+} from "./reverse-drawer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,12 +30,18 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "grid min-h-screen w-full overflow-x-hidden"
+          "grid min-h-screen w-full overflow-x-hidden bg-black"
         )}
       >
         <Providers>
-          <MobileDrawerNav />
           <ReverseDrawerRoot>
+            <ReverseDrawerContent className="p-4">
+              <ReverseDrawerClose>
+                <X className="w-4 h-4" />
+              </ReverseDrawerClose>
+              <p>Hello</p>
+            </ReverseDrawerContent>
+
             <nav className="sticky top-0 w-full bg-neutral-300">
               <div className="py-4 px-8 flex justify-between gap-2 max-w-screen-lg mx-auto">
                 <p className="hidden md:block">Nav</p>
